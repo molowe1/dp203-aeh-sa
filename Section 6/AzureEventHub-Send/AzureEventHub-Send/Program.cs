@@ -21,5 +21,5 @@ EventHubProducerClient _client = new EventHubProducerClient(connection_string);
         _batch.TryAdd(new Azure.Messaging.EventHubs.EventData(Encoding.UTF8.GetBytes(_order.ToString())));
 
     _client.SendAsync(_batch).GetAwaiter().GetResult();
-    Console.WriteLine("Batch of events sent");
+Console.WriteLine("Batch of events sent");
 
