@@ -1,0 +1,16 @@
+{
+    "Name": "adf-db-blobdiag",
+    "DataSourceType": "SQL Database",
+    "SQLDatabaseProperties": {
+        "Database": "adf-db",
+        "Server": "dp203section4",
+        "User": "dp203admin",
+        "Password": null,
+        "Table": "[dbo].[BlobDiagnostics]",
+        "MaxWriterCount": 1,
+        "MaxBatchCount": 10000,
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": null,
+    "ScriptType": "Output"
+}

@@ -1,0 +1,18 @@
+{
+    "name": "blobcapture",
+    "startFile": "transformation.asaql",
+    "configurations": [
+        {
+            "filePath": "JobConfig.json",
+            "subType": "JobConfig"
+        },
+        {
+            "filePath": "Outputs/011bac2f-55b8-817f-7335-32b131267026.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Inputs/5783dc7b-2c42-882b-75f2-8714d8c8564e-input.json",
+            "subType": "Input"
+        }
+    ]
+}
