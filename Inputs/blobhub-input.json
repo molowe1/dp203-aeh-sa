@@ -1,0 +1,21 @@
+{
+    "Name": "blobhub-input",
+    "Type": "Data Stream",
+    "DataSourceType": "Event Hub",
+    "EventHubProperties": {
+        "ServiceBusNamespace": "dp2-3-eventhubdemo",
+        "EventHubName": "blobhub",
+        "SharedAccessPolicyName": "dp203appstream_blobhub-input_policy",
+        "SharedAccessPolicyKey": null,
+        "ConsumerGroupName": "$Default",
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "13906006-32d9-4094-a32a-9025b59ea2c7.StreamAnalystics",
+    "Serialization": {
+        "Type": "Json",
+        "Encoding": "UTF8"
+    },
+    "PartitionKey": null,
+    "CompressionType": "None",
+    "ScriptType": "Input"
+}

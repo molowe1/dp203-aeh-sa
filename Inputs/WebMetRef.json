@@ -1,0 +1,25 @@
+{
+    "Name": "WebMetRef",
+    "Type": "Reference data",
+    "DataSourceType": "Blob Storage",
+    "BlobReferenceProperties": {
+        "StorageAccounts": [
+            {
+                "AccountName": "datalakedemodp203",
+                "AccountKey": null
+            }
+        ],
+        "Container": "reference",
+        "PathPattern": "WebMetricsTier.csv",
+        "DateFormat": "yyyy/MM/dd",
+        "TimeFormat": "HH",
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "269ef6df-c6e9-46ce-a026-2def543371db.StreamAnalystics",
+    "Serialization": {
+        "Type": "Csv",
+        "Encoding": "UTF8",
+        "FieldDelimiter": ","
+    },
+    "ScriptType": "Input"
+}

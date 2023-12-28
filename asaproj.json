@@ -1,0 +1,58 @@
+{
+    "name": "dp203appstream",
+    "startFile": "Transformation.asaql",
+    "configurations": [
+        {
+            "filePath": "Outputs/adf-db-blobdiag.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Outputs/adf-db-LastWebMetrics.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Outputs/adf-db-LasWebMetricSummary.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Outputs/adf-db-NeWebMetrics.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Outputs/adf-db-output.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Outputs/adf-db-WebMet.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Outputs/WebMetricsSummary.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Outputs/WebMetricsSummaryCount.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Inputs/WebMetRef.json",
+            "subType": "Input"
+        },
+        {
+            "filePath": "JobConfig.json",
+            "subType": "JobConfig"
+        },
+        {
+            "filePath": "Inputs/insightMetrics.json",
+            "subType": "Input"
+        },
+        {
+            "filePath": "Inputs/dp203-apphub.json",
+            "subType": "Input"
+        },
+        {
+            "filePath": "Inputs/blobhub-input.json",
+            "subType": "Input"
+        }
+    ]
+}
