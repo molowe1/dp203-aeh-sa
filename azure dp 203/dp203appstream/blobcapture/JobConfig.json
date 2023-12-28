@@ -7,13 +7,13 @@
     "EventsOutOfOrderPolicy": "Adjust",
     "Sku": {
         "Name": "StandardV2",
-        "StreamingUnits": "1"
+        "StreamingUnits": "1/3"
     },
     "CompatibilityLevel": "1.2",
-    "UseSystemAssignedIdentity": false,
+    "UseSystemAssignedIdentity": true,
     "GlobalStorage": {
         "AccountName": "datalakedemodp203",
-        "AccountKey": "********",
+        "AccountKey": null,
         "AuthenticationMode": "ConnectionString"
     },
     "ContentStoragePolicy": "SystemAccount",
@@ -27,6 +27,8 @@
         "VirtualNetworkName": null,
         "SubnetResourceId": null
     },
-    "DataSourceCredentialDomain": "2d44cba8-9eb4-4054-8380-f99192fa9cc2.StreamAnalystics",
-    "Tags": {}
+    "DataSourceCredentialDomain": "759dbeca-b707-4c4e-9cb0-6119ad4881af.StreamAnalystics",
+    "Tags": {
+        "hidden-link:/Microsoft.StreamAnalytics/streamingDataFlow/resource": "https://dp2-3-eventhubdemo.servicebus.windows.net:443/blobhub"
+    }
 }

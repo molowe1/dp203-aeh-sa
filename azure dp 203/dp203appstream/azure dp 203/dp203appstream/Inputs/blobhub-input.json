@@ -10,7 +10,7 @@
         "ConsumerGroupName": "$Default",
         "AuthenticationMode": "ConnectionString"
     },
-    "DataSourceCredentialDomain": "13906006-32d9-4094-a32a-9025b59ea2c7.StreamAnalystics",
+    "DataSourceCredentialDomain": "7b96a5dc-7d36-43ec-87c6-9673dbf6aa0c.StreamAnalystics",
     "Serialization": {
         "Type": "Json",
         "Encoding": "UTF8"
