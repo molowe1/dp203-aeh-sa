@@ -1,5 +1,5 @@
 {
-    "Name": "insightMetrics",
+    "Name": "nsgsourcelog",
     "Type": "Data Stream",
     "DataSourceType": "Blob Storage",
     "BlobStorageProperties": {
@@ -9,14 +9,14 @@
                 "AccountKey": null
             }
         ],
-        "Container": "insights-metrics-pt1m",
-        "PathPattern": "resourceId=/SUBSCRIPTIONS/976A6163-6CEA-4DFF-9B57-F63C294F349E/RESOURCEGROUPS/WEBAPP-GRP203/PROVIDERS/MICROSOFT.WEB/SITES/WEBAPP-SECT6-DP203/y={datetime:yyyy}/m={datetime:MM}/d={datetime:dd}/h={datetime:HH}/m={datetime:mm}",
+        "Container": "insights-logs-networksecuritygroupflowevent",
+        "PathPattern": "",
         "DateFormat": "yyyy/MM/dd",
         "TimeFormat": "HH",
         "SourcePartitionCount": 1,
         "AuthenticationMode": "ConnectionString"
     },
-    "DataSourceCredentialDomain": "07f7fb3b-bb28-4bbc-ad63-3ff177c2fe50.StreamAnalystics",
+    "DataSourceCredentialDomain": "99011b61-7402-4cad-9990-c2493ae0018b.StreamAnalystics",
     "Serialization": {
         "Type": "Json",
         "Encoding": "UTF8"

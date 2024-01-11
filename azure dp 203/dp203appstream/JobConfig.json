@@ -13,7 +13,7 @@
     "UseSystemAssignedIdentity": false,
     "GlobalStorage": {
         "AccountName": "datalakedemodp203",
-        "AccountKey": "********",
+        "AccountKey": null,
         "AuthenticationMode": "ConnectionString"
     },
     "ContentStoragePolicy": "SystemAccount",
@@ -27,6 +27,6 @@
         "VirtualNetworkName": null,
         "SubnetResourceId": null
     },
-    "DataSourceCredentialDomain": "2d44cba8-9eb4-4054-8380-f99192fa9cc2.StreamAnalystics",
+    "DataSourceCredentialDomain": "f5692221-e560-467b-93ae-fd866984fcdc.StreamAnalystics",
     "Tags": {}
 }

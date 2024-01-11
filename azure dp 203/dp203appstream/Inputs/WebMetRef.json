@@ -15,7 +15,7 @@
         "TimeFormat": "HH",
         "AuthenticationMode": "ConnectionString"
     },
-    "DataSourceCredentialDomain": "269ef6df-c6e9-46ce-a026-2def543371db.StreamAnalystics",
+    "DataSourceCredentialDomain": "b603ba5b-ff21-499c-9b22-5bc8c2ed057e.StreamAnalystics",
     "Serialization": {
         "Type": "Csv",
         "Encoding": "UTF8",
