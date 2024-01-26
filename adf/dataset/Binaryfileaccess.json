@@ -1,0 +1,18 @@
+{
+	"name": "Binaryfileaccess",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "appvmserver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "access.log"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

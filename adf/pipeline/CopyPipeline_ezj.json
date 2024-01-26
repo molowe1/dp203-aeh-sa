@@ -1,0 +1,188 @@
+{
+	"name": "CopyPipeline_ezj",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_parqview",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "."
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.parquet_view"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select top 100 * from  dbo.logdata_parquet",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Correlationid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Correlationid",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Operationname",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Operationname",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Status",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Eventcategory",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Eventcategory",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Level",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Time",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "Time",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Subscription",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Subscription",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Eventinitiatedby",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Eventinitiatedby",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Resourcetype",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Resourcetype",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Resourcegroup",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Resourcegroup",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Resource",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Resource",
+									"type": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_ezj",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_ezj",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-12-03T21:36:06Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
