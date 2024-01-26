@@ -1,0 +1,56 @@
+{
+	"name": "Jsonload",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "csv to ddb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "json"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"Correlationid": {
+					"type": "string"
+				},
+				"Operationname": {
+					"type": "string"
+				},
+				"Status": {
+					"type": "string"
+				},
+				"Eventcategory": {
+					"type": "string"
+				},
+				"Level": {
+					"type": "string"
+				},
+				"Time": {
+					"type": "string"
+				},
+				"Subscription": {
+					"type": "string"
+				},
+				"Eventinitiatedby": {
+					"type": "string"
+				},
+				"Resourcetype": {
+					"type": "string"
+				},
+				"Resourcegroup": {
+					"type": "string"
+				},
+				"Resource": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,12 @@
+{
+	"name": "appdblinkedservice",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=dp203section4.database.windows.net;initial catalog=app-db;user id=Dp203admin",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDc2QzcyMzg0LTMxN0ItNDc0QS1BOTE2LTIxRUZGRjE2NzI4M181MGZhMTQ4OC1lOTliLTQyOTAtOTFiYi1hNjdmN2Y3NGFhNTYiDQp9"
+		}
+	}
+}

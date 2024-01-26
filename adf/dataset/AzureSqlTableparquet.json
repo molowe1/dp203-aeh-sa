@@ -1,0 +1,76 @@
+{
+	"name": "AzureSqlTableparquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adf to db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Correlationid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Operationname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Eventcategory",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Level",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Subscription",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Eventinitiatedby",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Resourcetype",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Resourcegroup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Resource",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FilePath",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RandomCol",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FileName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "logdata_parquet_addCol"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

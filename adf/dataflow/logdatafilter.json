@@ -1,0 +1,117 @@
+{
+	"name": "logdatafilter",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "LOGDATA_PARQUET",
+						"type": "DatasetReference"
+					},
+					"name": "logdataparquetsource"
+				},
+				{
+					"dataset": {
+						"referenceName": "LogParquetLS",
+						"type": "DatasetReference"
+					},
+					"name": "Logparquetlatest"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "LogParquetLS",
+						"type": "DatasetReference"
+					},
+					"name": "logparquetsink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "resourcegroupfilter"
+				},
+				{
+					"name": "logparquetduplicatecheck"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Correlationid as string,",
+				"          Operationname as string,",
+				"          Status as string,",
+				"          Eventcategory as string,",
+				"          Level as string,",
+				"          Time as timestamp,",
+				"          Subscription as string,",
+				"          Eventinitiatedby as string,",
+				"          Resourcetype as string,",
+				"          Resourcegroup as string,",
+				"          Resource as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> logdataparquetsource",
+				"source(output(",
+				"          Correlationid as string,",
+				"          Operationname as string,",
+				"          Status as string,",
+				"          Eventcategory as string,",
+				"          Level as string,",
+				"          Time as timestamp,",
+				"          Subscription as string,",
+				"          Eventinitiatedby as string,",
+				"          Resourcetype as string,",
+				"          Resourcegroup as string,",
+				"          Resource as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Logparquetlatest",
+				"logparquetduplicatecheck filter(!(isNull({Resourcegroup}))) ~> resourcegroupfilter",
+				"logdataparquetsource, Logparquetlatest exists(logdataparquetsource@Correlationid == Logparquetlatest@Correlationid,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> logparquetduplicatecheck",
+				"resourcegroupfilter sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Correlationid as string,",
+				"          Operationname as string,",
+				"          Status as string,",
+				"          Eventcategory as string,",
+				"          Level as string,",
+				"          Time as timestamp,",
+				"          Subscription as string,",
+				"          Eventinitiatedby as string,",
+				"          Resourcetype as string,",
+				"          Resourcegroup as string,",
+				"          Resource as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Correlationid,",
+				"          Operationname,",
+				"          Status,",
+				"          Eventcategory,",
+				"          Level,",
+				"          Time,",
+				"          Subscription,",
+				"          Eventinitiatedby,",
+				"          Resourcetype,",
+				"          Resourcegroup,",
+				"          Resource",
+				"     )) ~> logparquetsink"
+			]
+		}
+	}
+}
