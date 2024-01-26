@@ -1,0 +1,17 @@
+{
+	"name": "afterjointable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adf to db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "finaltablejoin"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

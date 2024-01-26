@@ -1,0 +1,119 @@
+{
+	"name": "joinStream",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DestinationDataset_90z",
+						"type": "DatasetReference"
+					},
+					"name": "logstream"
+				},
+				{
+					"dataset": {
+						"referenceName": "addedcol_join",
+						"type": "DatasetReference"
+					},
+					"name": "samplelog"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "afterjointable",
+						"type": "DatasetReference"
+					},
+					"name": "finaltable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "rightjoinaddcol"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {Correlation id} as string,",
+				"          {Operation name} as string,",
+				"          Status as string,",
+				"          {Event category} as string,",
+				"          Level as string,",
+				"          Time as string,",
+				"          Subscription as string,",
+				"          {Event initiated by} as string,",
+				"          {Resource type} as string,",
+				"          {Resource group} as string,",
+				"          Resource as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> logstream",
+				"source(output(",
+				"          Correlationid as string,",
+				"          Operationname as string,",
+				"          Status as string,",
+				"          Eventcategory as string,",
+				"          Level as string,",
+				"          Time as timestamp,",
+				"          Subscription as string,",
+				"          Eventinitiatedby as string,",
+				"          Resourcetype as string,",
+				"          Resourcegroup as string,",
+				"          Resource as string,",
+				"          FilePath as string,",
+				"          RandomCol as string,",
+				"          FileName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> samplelog",
+				"logstream, samplelog join({Correlation id} == Correlationid,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> rightjoinaddcol",
+				"rightjoinaddcol sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          {Correlation id},",
+				"          {Operation name},",
+				"          Status = logstream@Status,",
+				"          {Event category},",
+				"          Level = logstream@Level,",
+				"          Time = logstream@Time,",
+				"          Subscription = logstream@Subscription,",
+				"          {Event initiated by},",
+				"          {Resource type},",
+				"          {Resource group},",
+				"          Resource = logstream@Resource,",
+				"          Correlationid,",
+				"          Operationname,",
+				"          Status = samplelog@Status,",
+				"          Eventcategory,",
+				"          Level = samplelog@Level,",
+				"          Time = samplelog@Time,",
+				"          Subscription = samplelog@Subscription,",
+				"          Eventinitiatedby,",
+				"          Resourcetype,",
+				"          Resourcegroup,",
+				"          Resource = samplelog@Resource,",
+				"          FilePath,",
+				"          RandomCol,",
+				"          FileName",
+				"     )) ~> finaltable"
+			]
+		}
+	}
+}

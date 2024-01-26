@@ -1,0 +1,74 @@
+{
+	"name": "jsonarrayflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "arrajson",
+						"type": "DatasetReference"
+					},
+					"name": "jsonarraystream"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "customerjsonarraytable",
+						"type": "DatasetReference"
+					},
+					"name": "jsonarraysink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "courseflatten"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          customerid as integer,",
+				"          customername as string,",
+				"          registered as boolean,",
+				"          courses as string[]",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'arrayOfDocuments') ~> jsonarraystream",
+				"jsonarraystream foldDown(unroll(courses, courses),",
+				"     mapColumn(",
+				"          custemerid = customerid,",
+				"          customername,",
+				"          registered,",
+				"          courses",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> courseflatten",
+				"courseflatten sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CustomerID as integer,",
+				"          CustomerName as string,",
+				"          Registered as boolean,",
+				"          Courses as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          CustomerID = custemerid,",
+				"          CustomerName = customername,",
+				"          Registered = registered,",
+				"          Courses = courses",
+				"     )) ~> jsonarraysink"
+			]
+		}
+	}
+}

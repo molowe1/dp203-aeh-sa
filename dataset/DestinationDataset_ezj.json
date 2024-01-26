@@ -1,0 +1,17 @@
+{
+	"name": "DestinationDataset_ezj",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adf to db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "parquet_view"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

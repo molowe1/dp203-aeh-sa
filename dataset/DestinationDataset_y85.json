@@ -1,0 +1,17 @@
+{
+	"name": "DestinationDataset_y85",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adf to db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "logdata"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
