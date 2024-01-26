@@ -1,0 +1,19 @@
+{
+	"name": "stagingoutput_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dummystorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "stagingoutput"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

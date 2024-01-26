@@ -1,0 +1,59 @@
+{
+	"name": "weblogdataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "stagingmetric_ds",
+						"type": "DatasetReference"
+					},
+					"name": "stagingmetricstream"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "stagingoutput_ds",
+						"type": "DatasetReference"
+					},
+					"name": "stagingoutputstream"
+				}
+			],
+			"transformations": [
+				{
+					"name": "selectcolumnstream"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          total as integer,",
+				"          minimum as integer,",
+				"          maximum as integer,",
+				"          average as integer,",
+				"          resourceId as string,",
+				"          time as string,",
+				"          metricName as string,",
+				"          timeGrain as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     purgeFiles: true,",
+				"     documentForm: 'documentPerLine') ~> stagingmetricstream",
+				"stagingmetricstream select(mapColumn(",
+				"          average,",
+				"          time,",
+				"          metricName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectcolumnstream",
+				"selectcolumnstream sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> stagingoutputstream"
+			]
+		}
+	}
+}

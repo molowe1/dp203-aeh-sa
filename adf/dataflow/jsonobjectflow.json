@@ -1,0 +1,81 @@
+{
+	"name": "jsonobjectflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "objectjson",
+						"type": "DatasetReference"
+					},
+					"name": "jsonobjectstream"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "jsonobject_table",
+						"type": "DatasetReference"
+					},
+					"name": "jsonarraysink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "detailflatten"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          customerid as integer,",
+				"          customername as string,",
+				"          registered as boolean,",
+				"          courses as string[],",
+				"          details as (mobile as string, city as string)",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'arrayOfDocuments') ~> jsonobjectstream",
+				"jsonobjectstream foldDown(unroll(courses, courses),",
+				"     mapColumn(",
+				"          customerid,",
+				"          customername,",
+				"          registered,",
+				"          courses,",
+				"          mobile = details.mobile,",
+				"          city = details.city",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> detailflatten",
+				"detailflatten sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CustomerID as integer,",
+				"          CustomerName as string,",
+				"          Registered as boolean,",
+				"          Courses as string,",
+				"          Mobile as string,",
+				"          City as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          CustomerID = customerid,",
+				"          CustomerName = customername,",
+				"          Registered = registered,",
+				"          Courses = courses,",
+				"          Mobile = mobile,",
+				"          City = city",
+				"     )) ~> jsonarraysink"
+			]
+		}
+	}
+}

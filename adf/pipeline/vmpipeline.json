@@ -1,0 +1,87 @@
+{
+	"name": "vmpipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copybinarydata",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Binaryfileaccess",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Binary1",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "binary flow",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Copybinarydata",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "binarydataflow",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-12-08T10:08:21Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

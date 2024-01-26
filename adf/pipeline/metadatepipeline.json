@@ -1,0 +1,128 @@
+{
+	"name": "metadatepipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "GetMetadataCSV",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems",
+						"itemName",
+						"exists",
+						"lastModified"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "GetMetadata-JSON",
+				"type": "GetMetadata",
+				"dependsOn": [
+					{
+						"activity": "GetMetadataCSV",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "arrajson",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems",
+						"exists",
+						"itemName",
+						"lastModified"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "JsonReadSettings"
+					}
+				}
+			},
+			{
+				"name": "GetMetadataParquet",
+				"type": "GetMetadata",
+				"dependsOn": [
+					{
+						"activity": "GetMetadata-JSON",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "LOGDATA_PARQUET",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems",
+						"exists",
+						"itemName",
+						"lastModified"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "ParquetReadSettings"
+					}
+				}
+			}
+		],
+		"variables": {
+			"webhookvar": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-12-08T16:11:49Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
